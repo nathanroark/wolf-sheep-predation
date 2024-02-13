@@ -1,12 +1,22 @@
 "use client"
 
+import Link from "next/link"
 import React, { useRef, useState, useCallback } from "react"
 import { WSP_Step } from "./wsp"
 import type { WSP_State, agent, cell } from "@/types/types"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetFooter,
+  SheetTitle,
+  SheetHeader,
+  SheetDescription,
+} from "@/components/ui/sheet"
 
+import { buttonVariants } from "@/components/ui/button"
 const cellColor = (cell: string) => {
   if (cell == "dirt") return "bg-[#2f2f2f]"
   if (cell == "grass") return "bg-[#38473c]"
@@ -58,7 +68,7 @@ export const WolfSheepPredation: React.FC = () => {
               }
             }}
           >
-            {running ? "stop" : "start"}
+            {running ? "Stop" : "Start"}
           </Button>
           <Button variant="outline" onClick={() => setState(WSP_Step(state))}>
             Step
@@ -81,17 +91,21 @@ export const WolfSheepPredation: React.FC = () => {
           >
             Clear
           </Button>
+
           <SheetTrigger asChild>
-            <Button variant="outline">Info</Button>
+            <Button variant="outline">Stats</Button>
           </SheetTrigger>
+          <Button asChild variant="outline">
+            <Link href="/about">About</Link>
+          </Button>
           <SheetContent>
-            {/* <SheetHeader> */}
-            {/*   <SheetTitle>Edit profile</SheetTitle> */}
-            {/*   <SheetDescription> */}
-            {/*     Make changes to your profile here. Click save when you're done. */}
-            {/*   </SheetDescription> */}
-            {/* </SheetHeader> */}
-            <div className="flex w-full flex-col gap-8 font-bold">
+            <SheetHeader className="pb-6">
+              <SheetTitle>Run Statistics</SheetTitle>
+              <SheetDescription>
+                Wolf Sheep Predation Simulation
+              </SheetDescription>
+            </SheetHeader>
+            <div className="flex w-full flex-col gap-8 text-xl font-bold">
               <div className="flex  flex-col">
                 <div className="flex items-center justify-start gap-2">
                   <div className={cn("size-5", cellColor("wolf"))}></div>
@@ -119,29 +133,29 @@ export const WolfSheepPredation: React.FC = () => {
                 </div>
               </div>
               <div className="w-40 pr-2">
-                <div className="flex w-24 justify-between xl:w-full">
+                <div className="flex justify-between xl:w-full">
                   <div>clock</div> <div>{state.clock}</div>
                 </div>
-                <div className="flex w-24 justify-between xl:w-full">
+                <div className="flex justify-between xl:w-full">
                   <div>wolves </div>
                   <div>{state.wolves}</div>
                 </div>
-                <div className="flex w-24 justify-between xl:w-full">
+                <div className="flex justify-between xl:w-full">
                   <div>sheep</div> <div>{state.sheep}</div>
                 </div>
-                <div className="flex w-24 justify-between xl:w-full">
+                <div className="flex justify-between xl:w-full">
                   grass <div>{state.grass}</div>
                 </div>
-                <div className="flex w-24 justify-between xl:w-full">
+                <div className="flex justify-between xl:w-full">
                   dirt <div>{state.dirt}</div>
                 </div>
               </div>
             </div>
-            {/* <SheetFooter> */}
-            {/*   <SheetClose asChild> */}
-            {/*     <Button type="submit">Save changes</Button> */}
-            {/*   </SheetClose> */}
-            {/* </SheetFooter> */}
+            <SheetFooter className="pt-4">
+              <Button asChild variant="outline">
+                <Link href="/about">About</Link>
+              </Button>
+            </SheetFooter>
           </SheetContent>
         </div>
         {state.grid.length > 0 ? (
