@@ -94,7 +94,7 @@ const About = () => {
           <li>
             For each dirt cell, determine if the cell has regrown to grass
           </li>
-          <li>Move each agent and reduce the moving agent's energy</li>
+          <li>Move each agent and reduce the moving agent&apos;s energy</li>
           <li>
             If any cells contain both wolves and sheep, the wolves eat the sheep
             and gain energy
